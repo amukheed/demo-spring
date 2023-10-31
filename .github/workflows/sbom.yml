@@ -7,9 +7,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Build
-        run: mvn clean install
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+          cache: 'maven'
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
